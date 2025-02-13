@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% for curso in cursos %}
+  <div class="col-md-4 mb-4">
+    <div class="card bg-black text-white">
+      <img src="{{ curso.thumbnail.url }}" class="card-img-top" alt="{{ curso.titulo }}">
+      <div class="card-body">
+        <h5 class="card-title">{{ curso.titulo }}</h5>
+        <p class="card-text text-gray-400">{{ curso.descricao }}</p>
+        <a href="{% url 'detalhes_curso' curso.id %}" class="btn btn-purple">Ver Curso</a>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+{% endblock %}

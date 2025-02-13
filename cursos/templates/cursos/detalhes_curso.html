@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+  <h2>{{ curso.titulo }}</h2>
+  <p>{{ curso.descricao }}</p>
+  <div class="row">
+    <div class="col-md-8">
+      <video controls class="w-100">
+        <source src="{{ aula.video_url }}" type="video/mp4">
+        Seu navegador não suporta o elemento de vídeo.
+      </video>
+    </div>
+    <div class="col-md-4">
+      <h3>Aulas</h3>
+      <ul>
+        {% for aula in aulas %}
+        <li><a href="#">{{ aula.titulo }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
