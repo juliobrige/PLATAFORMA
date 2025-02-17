@@ -6,6 +6,11 @@ from django.conf import settings
 from .forms import RegistroForm
 from .models import Usuario
 from .email import enviar_email_boas_vindas
+from pagamentos.models import MpesaPayment
+from cursos.models import Curso
+
+
+
 
 def registro(request):
     """Cadastro de novo usuário"""
@@ -56,12 +61,16 @@ def user_login(request):
 
     return render(request, 'usuarios/login.html')
 
-
 @login_required
 def dashboard(request):
-    """Área interna acessível apenas para usuários logados"""
-    return render(request, 'usuarios/dashboard.html')
+    # Filtra os cursos pagos pelo usuário atual
+    cursos_pagos_ids = MpesaPayment.objects.filter(usuario=request.user, status='aprovado').values_list('curso_id', flat=True)
+    cursos_pagos = Curso.objects.filter(id__in=cursos_pagos_ids)
 
+    context = {
+        'cursos_pagos': cursos_pagos,  # Passa os cursos pagos para o template
+    }
+    return render(request, 'usuarios/dashboard.html', context)
 
 @login_required
 def user_logout(request):
