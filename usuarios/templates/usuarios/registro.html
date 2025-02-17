@@ -33,10 +33,38 @@
         >
       </div>
 
+      <!-- Campo de Gênero -->
+      <div class="form-group">
+        <label for="id_genero" class="block text-sm font-medium text-gray-300">Gênero</label>
+        <select
+          name="genero"
+          id="id_genero"
+          class="mt-1 block w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+          required
+        >
+          <option value="" disabled selected>Selecione seu gênero</option>
+          <option value="M">Masculino</option>
+          <option value="F">Feminino</option>
+          <option value="O">Outro</option>
+        </select>
+      </div>
+
+      <!-- Campo de Número de Telefone -->
+      <div class="form-group">
+        <label for="id_telefone" class="block text-sm font-medium text-gray-300">Número de Telefone</label>
+        <input
+          type="tel"
+          name="telefone"
+          id="id_telefone"
+          class="mt-1 block w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
+          placeholder="(XX) XXXXX-XXXX"
+          required
+        >
+      </div>
+
       <!-- Campo de Senha -->
       <div class="form-group">
         <label for="id_password1" class="block text-sm font-medium text-gray-300">Senha</label>
-       
         <input
           type="password"
           name="password1"
@@ -44,7 +72,7 @@
           class="mt-1 block w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
           required
         >
-        <p> No minimo 8 letras e numero</p>
+        <p class="text-xs text-gray-400 mt-1">Mínimo de 8 caracteres, incluindo números e letras.</p>
       </div>
 
       <!-- Campo de Confirmação de Senha -->

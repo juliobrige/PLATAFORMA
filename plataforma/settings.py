@@ -1,6 +1,12 @@
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+load_dotenv()
+
+import socket
+socket.setdefaulttimeout(50)  # Define um timeout de 30 segundos
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -28,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'usuarios',
     'cursos',
+    'pagamentos',
 ]
 
 MIDDLEWARE = [
@@ -101,6 +108,7 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+import os
 
 
 STATIC_URL = '/static/'
@@ -109,6 +117,27 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'usuarios.Usuario'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'juliobenjamimbernardo36@gmail.com'
+EMAIL_HOST_PASSWORD = 'xuke plor iwdx wmbb'
+
+
+# settings.py
+
+MPESA_CONFIG = {
+    'CONSUMER_KEY': 'sua_consumer_key',
+    'CONSUMER_SECRET': 'sua_consumer_secret',
+    'SHORTCODE': 'seu_shortcode',
+    'PASSKEY': 'sua_passkey',
+    'CALLBACK_URL': 'https://seusite.com/mpesa/callback/',  # URL de callback
+}
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

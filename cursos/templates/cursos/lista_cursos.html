@@ -1,16 +1,75 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% for curso in cursos %}
-  <div class="col-md-4 mb-4">
-    <div class="card bg-black text-white">
-      <img src="{{ curso.thumbnail.url }}" class="card-img-top" alt="{{ curso.titulo }}">
-      <div class="card-body">
-        <h5 class="card-title">{{ curso.titulo }}</h5>
-        <p class="card-text text-gray-400">{{ curso.descricao }}</p>
-        <a href="{% url 'detalhes_curso' curso.id %}" class="btn btn-purple">Ver Curso</a>
+<style>
+  .text-gradient-rocket {
+    background: linear-gradient(90deg, #8257e5, #61dafb);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hover-scale {
+    transition: transform 0.3s ease;
+  }
+  .hover-scale:hover {
+    transform: scale(1.05);
+  }
+</style>
+<div class="container py-5">
+  <!-- Título da Página -->
+  <h1 class="text-4xl font-bold text-center mb-8 text-gradient-rocket">
+    Cursos Disponíveis
+  </h1>
+
+  <!-- Lista de Cursos -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for curso in cursos %}
+    <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden hover-scale transition-transform duration-300">
+      <!-- Thumbnail do Curso -->
+      <img src="{{ curso.thumbnail.url }}" alt="{{ curso.titulo }}" class="w-full h-48 object-cover">
+
+      <!-- Corpo do Card -->
+      <div class="p-6">
+        <!-- Título do Curso -->
+        <h2 class="text-xl font-bold text-purple-400 mb-2">
+          {{ curso.titulo }}
+        </h2>
+
+        <!-- Descrição do Curso -->
+        <p class="text-gray-300 mb-4">
+          {{ curso.descricao }}
+        </p>
+
+        <!-- Professor do Curso -->
+        <p class="text-gray-400 mb-2">
+          <i class="fas fa-chalkboard-teacher mr-2"></i>Professor: {{ curso.professor }}
+        </p>
+
+        <!-- Preço do Curso -->
+        <p class="text-gray-400 mb-4">
+          <i class="fas fa-dollar-sign mr-2"></i>Preço: MT {{ curso.preco }}
+        </p>
+
+        <!-- Verifica se o usuário já pagou pelo curso -->
+        {% if curso.id in cursos_pagos %}
+          <!-- Botão de Acessar Curso -->
+          <a
+            href="{% url 'detalhes_curso' curso.id %}"
+            class="bg-gradient-to-r from-green-600 to-teal-600 text-white py-2 px-4 rounded-md hover:from-green-700 hover:to-teal-700 transition-all duration-300 block text-center"
+          >
+            <i class="fas fa-play-circle mr-2"></i>Acessar Curso
+          </a>
+        {% else %}
+          <!-- Botão de Pagamento -->
+          <a
+            href="{% url 'mpesa_pagar' %}"
+            class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-2 px-4 rounded-md hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 block text-center"
+          >
+            <i class="fas fa-shopping-cart mr-2"></i>Pagar Agora
+          </a>
+        {% endif %}
       </div>
     </div>
+    {% endfor %}
   </div>
-{% endfor %}
+</div>
 {% endblock %}

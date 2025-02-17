@@ -12,8 +12,8 @@ def registro(request):
     if request.method == 'POST':
         form = RegistroForm(request.POST)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.aprovado = False  # Novo usuário precisa ser aprovado pelo admin
+            user = form.save(commit=True)
+            user.aprovado = True  # Novo usuário precisa ser aprovado pelo admin
             user.save()
 
             send_mail(

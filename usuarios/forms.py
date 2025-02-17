@@ -13,6 +13,11 @@ class RegistroForm(UserCreationForm):
     class Meta:
         model = Usuario
         fields = ['username', 'email', 'genero', 'telefone', 'password1', 'password2']
+    def clean_password1(self):
+        password1 = self.cleaned_data.get('password1')
+        if len(password1) > 8:
+            raise ValidationError("A senha deve ter no máximo 8 caracteres.")
+        return password1
         
 class LoginForm(forms.Form):
     username = forms.CharField()
