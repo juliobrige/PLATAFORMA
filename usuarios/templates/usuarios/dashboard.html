@@ -16,36 +16,78 @@
       </a>
     </div>
 
-    <!-- Mensagem de Boas-Vindas -->
+    <!-- Mensagem de Boas-Vindas com Foto -->
     <div class="bg-gray-700 rounded-lg p-6 mb-8">
-      <p class="text-lg text-gray-300">
-        Bem-vindo, <span class="font-bold text-purple-400">{{ user.username }}</span>!
-      </p>
-      <p class="text-sm text-gray-400 mt-2">
-        Aqui estão os cursos que você já pagou e pode acessar.
-      </p>
+      <div class="flex items-center">
+        <!-- Foto do Perfil -->
+        <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+          <img 
+            src="{% if user.foto_perfil %}{{ user.foto_perfil.url }}{% else %}/media/default.jpg{% endif %}" 
+            alt="Foto de perfil" 
+            class="w-full h-full object-cover"
+          >
+        </div>
+        <!-- Nome do Usuário -->
+        <div>
+          <p class="text-lg text-gray-300">
+            Bem-vindo, <span class="font-bold text-purple-400">{{ user.username }}</span>!
+          </p>
+          <p class="text-sm text-gray-400 mt-2">
+            Aqui você pode gerenciar suas atividades e cursos.
+          </p>
+        </div>
+      </div>
     </div>
 
-    <!-- Cards de Cursos Pagos -->
+    <!-- Cards de Cursos -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {% for curso in cursos_pagos %}
+      <!-- Card 1: Curso de Python -->
       <div class="bg-gray-700 rounded-lg p-6 hover:scale-105 transition-all duration-300">
         <h3 class="text-xl font-bold text-purple-400 mb-4">
-          <i class="fas fa-book-open mr-2"></i>{{ curso.titulo }}
+          <i class="fas fa-book-open mr-2"></i>Introdução ao Python
         </h3>
         <p class="text-gray-300 mb-4">
-          {{ curso.descricao }}
+          Aprenda os conceitos básicos de Python e comece a programar.
         </p>
         <a
-          href="{% url 'detalhes_curso' curso.id %}"  <!-- Substitua pela URL correta -->
+          href="#"  <!-- Substitua pela URL correta -->
+          class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-2 px-4 rounded-md hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 block text-center"
+        >
           <i class="fas fa-eye mr-2"></i>Ver Curso
         </a>
       </div>
-      {% empty %}
-      <div class="col-span-3 text-center text-gray-400">
-        <p>Você ainda não pagou por nenhum curso.</p>
+
+      <!-- Card 2: Curso de Django -->
+      <div class="bg-gray-700 rounded-lg p-6 hover:scale-105 transition-all duration-300">
+        <h3 class="text-xl font-bold text-purple-400 mb-4">
+          <i class="fas fa-book-open mr-2"></i>Desenvolvimento Web com Django
+        </h3>
+        <p class="text-gray-300 mb-4">
+          Crie aplicações web modernas com Django.
+        </p>
+        <a
+          href="#"  <!-- Substitua pela URL correta -->
+          class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-2 px-4 rounded-md hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 block text-center"
+        >
+          <i class="fas fa-eye mr-2"></i>Ver Curso
+        </a>
       </div>
-      {% endfor %}
+
+      <!-- Card 3: Curso de JavaScript -->
+      <div class="bg-gray-700 rounded-lg p-6 hover:scale-105 transition-all duration-300">
+        <h3 class="text-xl font-bold text-purple-400 mb-4">
+          <i class="fas fa-book-open mr-2"></i>JavaScript Avançado
+        </h3>
+        <p class="text-gray-300 mb-4">
+          Domine JavaScript e crie aplicações interativas.
+        </p>
+        <a
+          href="#"  <!-- Substitua pela URL correta -->
+          class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-2 px-4 rounded-md hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 block text-center"
+        >
+          <i class="fas fa-eye mr-2"></i>Ver Curso
+        </a>
+      </div>
     </div>
 
     <!-- Seção de Atividades Recentes -->
