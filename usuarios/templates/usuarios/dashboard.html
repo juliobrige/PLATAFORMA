@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="container mx-auto px-4 py-8">
-  <div class="max-w-4xl mx-auto bg-gray-800 rounded-lg shadow-lg p-8">
+  <div class="max-w-4xl mx-auto bg-gray-800 rounded-lg shadow-lg p-8 backdrop-blur-md bg-opacity-90">
     <!-- Cabeçalho do Dashboard -->
     <div class="flex justify-between items-center mb-8">
       <h2 class="text-3xl font-bold text-gradient-rocket">
@@ -17,7 +17,7 @@
     </div>
 
     <!-- Mensagem de Boas-Vindas com Foto -->
-    <div class="bg-gray-700 rounded-lg p-6 mb-8">
+    <div class="bg-gray-700 rounded-lg p-6 mb-8 backdrop-blur-md bg-opacity-90">
       <div class="flex items-center">
         <!-- Foto do Perfil -->
         <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
@@ -39,55 +39,34 @@
       </div>
     </div>
 
-    <!-- Cards de Cursos -->
+    <!-- Cards de Cursos Pagos -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Card 1: Curso de Python -->
-      <div class="bg-gray-700 rounded-lg p-6 hover:scale-105 transition-all duration-300">
+      {% for curso in cursos_pagos %}
+      <div class="bg-gray-700 rounded-lg p-6 hover:scale-105 transition-all duration-300 backdrop-blur-md bg-opacity-90">
+        <!-- Imagem do Curso -->
+        <div class="w-full h-40 rounded-lg overflow-hidden mb-4">
+          <img 
+            src="{% if curso.thumbnail %}{{ curso.thumbnail.url }}{% else %}/media/default_course.jpg{% endif %}" 
+            alt="{{ curso.nome }}" 
+            class="w-full h-full object-cover"
+          >
+        </div>
+        <!-- Título do Curso -->
         <h3 class="text-xl font-bold text-purple-400 mb-4">
-          <i class="fas fa-book-open mr-2"></i>Introdução ao Python
+          <i class="fas fa-book-open mr-2"></i>{{ curso.titulo }}
         </h3>
+        <!-- Descrição do Curso -->
         <p class="text-gray-300 mb-4">
-          Aprenda os conceitos básicos de Python e comece a programar.
+          {{ curso.descricao }}
         </p>
+        <!-- Botão para Ver o Curso -->
         <a
-          href="#"  <!-- Substitua pela URL correta -->
-          class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-2 px-4 rounded-md hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 block text-center"
-        >
+          href="{% url 'detalhes_curso' curso.id %}"  <!-- Substitua pela URL correta -->
+     
           <i class="fas fa-eye mr-2"></i>Ver Curso
         </a>
       </div>
-
-      <!-- Card 2: Curso de Django -->
-      <div class="bg-gray-700 rounded-lg p-6 hover:scale-105 transition-all duration-300">
-        <h3 class="text-xl font-bold text-purple-400 mb-4">
-          <i class="fas fa-book-open mr-2"></i>Desenvolvimento Web com Django
-        </h3>
-        <p class="text-gray-300 mb-4">
-          Crie aplicações web modernas com Django.
-        </p>
-        <a
-          href="#"  <!-- Substitua pela URL correta -->
-          class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-2 px-4 rounded-md hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 block text-center"
-        >
-          <i class="fas fa-eye mr-2"></i>Ver Curso
-        </a>
-      </div>
-
-      <!-- Card 3: Curso de JavaScript -->
-      <div class="bg-gray-700 rounded-lg p-6 hover:scale-105 transition-all duration-300">
-        <h3 class="text-xl font-bold text-purple-400 mb-4">
-          <i class="fas fa-book-open mr-2"></i>JavaScript Avançado
-        </h3>
-        <p class="text-gray-300 mb-4">
-          Domine JavaScript e crie aplicações interativas.
-        </p>
-        <a
-          href="#"  <!-- Substitua pela URL correta -->
-          class="bg-gradient-to-r from-purple-600 to-indigo-600 text-white py-2 px-4 rounded-md hover:from-purple-700 hover:to-indigo-700 transition-all duration-300 block text-center"
-        >
-          <i class="fas fa-eye mr-2"></i>Ver Curso
-        </a>
-      </div>
+      {% endfor %}
     </div>
 
     <!-- Seção de Atividades Recentes -->
@@ -95,7 +74,7 @@
       <h3 class="text-2xl font-bold text-purple-400 mb-4">
         <i class="fas fa-history mr-2"></i>Atividades Recentes
       </h3>
-      <div class="bg-gray-700 rounded-lg p-6">
+      <div class="bg-gray-700 rounded-lg p-6 backdrop-blur-md bg-opacity-90">
         <ul class="space-y-4">
           <li class="text-gray-300">
             <i class="fas fa-check-circle text-green-400 mr-2"></i>Você completou o curso "Introdução ao Python".
